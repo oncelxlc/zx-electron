@@ -1,6 +1,16 @@
 {
   "name": "zx-electron",
   "version": "0.0.1",
+  "description": "Angular + Electron",
+  "homepage": "https://github.com/oncelxlc/zx-electron",
+  "bugs": {
+    "url": "https://github.com/oncelxlc/zx-electron/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ant-design/ant-design"
+  },
+  "license": "MIT",
   "main": "main.js",
   "scripts": {
     "ng": "ng",
@@ -9,6 +19,12 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "ng build && electron ."
+  },
+  "engines": {
+    "node": "^18.13.0 || ^20.9.0",
+    "yarn": ">=1.22.4 <2",
+    "npm": "Please use yarn instead of NPM to install dependencies",
+    "pnpm": "Please use yarn instead of NPM to install dependencies"
   },
   "private": true,
   "dependencies": {
