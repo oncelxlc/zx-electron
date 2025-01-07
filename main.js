@@ -1,45 +1,46 @@
-// main.js
+const {app, BrowserWindow} = require("electron");
+const {join} = require("node:path");
 
-// Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
-const path = require('node:path')
+// 定义创建窗口的函数
+function createWindow() {
+  // 创建一个新的 BrowserWindow 实例
+  const win = new BrowserWindow({
+    // 设置窗口的 web 偏好设置
+    webPreferences: {
+      // 加载一个预加载脚本
+      preload: join(__dirname, 'preload.js'),
+      // 不允许在渲染进程中使用 Node.js 模块
+      nodeIntegration: false,
+      // 隔离上下文
+      contextIsolation: true,
+      // 禁用远程模块
+      enableRemoteModule: false
+    },
+    // 设置窗口的宽度和高度
+    width: 1280,
+    height: 720,
+  });
 
-const createWindow = () => {
-    // Create the browser window.
-    const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
-        }
-    })
-
-    // 加载 index.html
-    mainWindow.loadFile('index.html')
-
-    // 打开开发工具
-    // mainWindow.webContents.openDevTools()
+  // 如果应用没有被打包
+  if (!app.isPackaged) {
+    // 加载本地开发服务器的 URL
+    win.loadURL("http://localhost:9701");
+  }
+  // 如果应用已经被打包
+  else {
+    // 加载打包后的文件
+    win.loadFile("dist/zx-electron/browser/index.html");
+  }
 }
 
-// 这段程序将会在 Electron 结束初始化
-// 和创建浏览器窗口的时候调用
-// 部分 API 在 ready 事件触发后才能使用。
+// 当 Electron 应用准备就绪时调用 createWindow 函数
 app.whenReady().then(() => {
-    createWindow()
+  createWindow();
+});
 
-    app.on('activate', () => {
-        // 在 macOS 系统内, 如果没有已开启的应用窗口
-        // 点击托盘图标时通常会重新创建一个新窗口
-        if (BrowserWindow.getAllWindows().length === 0) createWindow()
-    })
-})
-
-// 除了 macOS 外，当所有窗口都被关闭的时候退出程序。 因此, 通常
-// 对应用程序和它们的菜单栏来说应该时刻保持激活状态, 
-// 直到用户使用 Cmd + Q 明确退出
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit()
-})
-
-// 在当前文件中你可以引入所有的主进程代码
-// 也可以拆分成几个文件，然后用 require 导入。
+// 当所有窗口都被关闭时，退出应用（除了 macOS）
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
+});
