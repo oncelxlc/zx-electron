@@ -18,13 +18,17 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "electron": "ng build && electron ."
+    "dev:angular": "ng build --watch --configuration development",
+    "dev:electron": "wait-on http://localhost:9701 && electron .",
+    "dev:serve": "npm-run-all -p start dev:electron",
+    "dev": "npm-run-all -p dev:angular dev:electron",
+    "electron": "electron ."
   },
   "engines": {
-    "node": "^18.13.0 || ^20.9.0",
+    "node": "^20.18.1 || >22.12.0",
     "yarn": ">=1.22.4 <2",
-    "npm": "Please use yarn instead of NPM to install dependencies",
-    "pnpm": "Please use yarn instead of NPM to install dependencies"
+    "npm": "Please use yarn instead of YARN to install dependencies",
+    "pnpm": "Please use yarn instead of YARN to install dependencies"
   },
   "private": true,
   "dependencies": {
@@ -46,12 +50,15 @@
     "@angular/compiler-cli": "^19.0.5",
     "@types/jasmine": "~5.1.4",
     "electron": "^33.3.1",
+    "electron-builder": "^25.1.8",
     "jasmine-core": "~5.1.2",
     "karma": "~6.4.3",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.6.3"
+    "npm-run-all": "^4.1.5",
+    "typescript": "~5.6.3",
+    "wait-on": "^8.0.1"
   }
 }

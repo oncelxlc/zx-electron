@@ -65,7 +65,9 @@
               "buildTarget": "zx-electron:build:production"
             },
             "development": {
-              "buildTarget": "zx-electron:build:development"
+              "buildTarget": "zx-electron:build:development",
+              "host": "localhost",
+              "port": 9701
             }
           },
           "defaultConfiguration": "development"
