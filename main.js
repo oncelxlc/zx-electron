@@ -8,13 +8,13 @@ function createWindow() {
     // 设置窗口的 web 偏好设置
     webPreferences: {
       // 加载一个预加载脚本
-      preload: join(__dirname, 'preload.js'),
+      preload: join(__dirname, "preload.js"),
       // 不允许在渲染进程中使用 Node.js 模块
       nodeIntegration: false,
       // 隔离上下文
       contextIsolation: true,
       // 禁用远程模块
-      enableRemoteModule: false
+      enableRemoteModule: false,
     },
     // 设置窗口的宽度和高度
     width: 1280,
@@ -36,6 +36,11 @@ function createWindow() {
 // 当 Electron 应用准备就绪时调用 createWindow 函数
 app.whenReady().then(() => {
   createWindow();
+
+  // 当应用在 macOS 上，并且没有打开的窗口时，创建一个新的窗口
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
 });
 
 // 当所有窗口都被关闭时，退出应用（除了 macOS）
