@@ -5,6 +5,7 @@ const {join} = require("node:path");
 function createWindow() {
   // 创建一个新的 BrowserWindow 实例
   const win = new BrowserWindow({
+    frame: false,
     // 设置窗口的 web 偏好设置
     webPreferences: {
       // 加载一个预加载脚本
