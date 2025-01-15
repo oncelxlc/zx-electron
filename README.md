@@ -1,5 +1,15 @@
 # ZxElectron
 
-# Electron初项目
+## 基本操作
 
-Electron基础学习，包管理器使用 yarn 
+### 安装依赖
+
+```shell
+yarn install
+```
+
+### 运行
+
+```shell
+npm run dev:serve
+```

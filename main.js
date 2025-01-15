@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require("electron");
+const {app, BrowserWindow, ipcMain} = require("electron");
 const {join} = require("node:path");
 
 // 定义创建窗口的函数
@@ -32,6 +32,10 @@ function createWindow() {
     // 加载打包后的文件
     win.loadFile("dist/zx-electron/browser/index.html");
   }
+
+  ipcMain.on('close-app', () => {
+    app.quit();
+  });
 }
 
 // 当 Electron 应用准备就绪时调用 createWindow 函数
