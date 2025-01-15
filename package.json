@@ -18,10 +18,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev:angular": "ng build --watch --configuration development",
+    "dev-build:angular": "ng build --watch --configuration development",
     "dev:electron": "wait-on http://localhost:9701 && electron .",
-    "dev:serve": "npm-run-all -p start dev:electron",
-    "dev": "npm-run-all -p dev:angular dev:electron",
+    "dev-build:electron": "wait-on ./dist/zx-electron/browser/index.html && electron .",
+    "dev:serve": "concurrently --kill-others \"npm run start\" \"npm run dev:electron\"",
+    "dev:build": "concurrently dev-build:angular dev:electron",
     "electron": "electron ."
   },
   "engines": {
@@ -48,8 +49,9 @@
     "@angular-devkit/build-angular": "^19.0.7",
     "@angular/cli": "^19.0.7",
     "@angular/compiler-cli": "^19.0.6",
-    "@types/electron": "^1.6.12",
     "@types/jasmine": "~5.1.4",
+    "@types/node": "^22.10.6",
+    "concurrently": "^9.1.2",
     "electron": "^33.3.1",
     "electron-builder": "^25.1.8",
     "jasmine-core": "~5.1.2",
@@ -58,7 +60,6 @@
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "npm-run-all": "^4.1.5",
     "typescript": "~5.6.3",
     "wait-on": "^8.0.1"
   }
