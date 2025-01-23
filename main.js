@@ -30,7 +30,7 @@ function createWindow() {
   // 如果应用已经被打包
   else {
     // 加载打包后的文件
-    win.loadFile("dist/zx-electron/browser/index.html");
+    win.loadFile("web-projects/dist/electron-ng/browser/index.html");
   }
 
   ipcMain.on('close-app', () => {
