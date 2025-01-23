@@ -10,9 +10,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'zx-electron';
-  test = false;
 
   onClose() {
-    (window as any)['electron'].send('close-app');
+    window.electron.send('close-app');
   }
 }
