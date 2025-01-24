@@ -13,16 +13,10 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "dev-build:angular": "ng build --watch --configuration development",
     "dev:electron": "wait-on http://localhost:9701 && electron .",
-    "dev-build:electron": "wait-on ./dist/zx-electron/browser/index.html && electron .",
-    "dev:serve": "concurrently --kill-others \"npm run start\" \"npm run dev:electron\"",
-    "dev:build": "concurrently dev-build:angular dev:electron",
+    "dev:electron:build": "wait-on ./dist/zx-electron/browser/index.html && electron .",
+    "dev:serve": "concurrently --kill-others \"cd web-projects/electron-ng && npm run start\" \"npm run dev:electron\"",
+    "dev:build": "concurrently --kill-others \"cd web-projects/electron-ng && npm run build:dev\" \"npm run dev:electron:build\"",
     "electron": "electron ."
   },
   "engines": {
@@ -32,6 +26,8 @@
   "devDependencies": {
     "electron": "^34.0.1",
     "electron-builder": "^25.1.8",
-    "electron-builder-squirrel-windows": "^25.1.8"
+    "electron-builder-squirrel-windows": "^25.1.8",
+    "wait-on": "^8.0.2",
+    "concurrently": "^9.1.2"
   }
 }
