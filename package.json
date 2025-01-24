@@ -13,11 +13,11 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "dev:electron": "wait-on http://localhost:9701 && electron .",
-    "dev:electron:build": "wait-on ./dist/zx-electron/browser/index.html && electron .",
+    "dev:electron": "wait-on http://localhost:9701 && npm run electron",
+    "dev:electron:build": "wait-on ./dist/zx-electron/browser/index.html && npm run electron",
     "dev:serve": "concurrently --kill-others \"cd web-projects/electron-ng && npm run start\" \"npm run dev:electron\"",
     "dev:build": "concurrently --kill-others \"cd web-projects/electron-ng && npm run build:dev\" \"npm run dev:electron:build\"",
-    "electron": "electron ."
+    "electron": "electron . --trace-warnings"
   },
   "engines": {
     "node": "^20.18.1 || >22.12.0",
