@@ -1,7 +1,7 @@
 {
   "name": "zx-electron",
   "version": "0.0.1",
-  "description": "Angular + Electron",
+  "description": "Web + Electron",
   "homepage": "https://github.com/oncelxlc/zx-electron",
   "bugs": {
     "url": "https://github.com/oncelxlc/zx-electron/issues"
@@ -13,52 +13,21 @@
   "license": "MIT",
   "main": "main.js",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "dev:angular": "ng build --watch --configuration development",
-    "dev:electron": "wait-on http://localhost:9701 && electron .",
-    "dev:serve": "npm-run-all -p start dev:electron",
-    "dev": "npm-run-all -p dev:angular dev:electron",
-    "electron": "electron ."
+    "dev:electron": "wait-on http://localhost:9701 && npm run electron",
+    "dev:electron:build": "wait-on ./dist/zx-electron/browser/index.html && npm run electron",
+    "dev:serve": "concurrently --kill-others \"cd web-projects/electron-ng && npm run start\" \"npm run dev:electron\"",
+    "dev:build": "concurrently --kill-others \"cd web-projects/electron-ng && npm run build:dev\" \"npm run dev:electron:build\"",
+    "electron": "electron . --trace-warnings"
   },
   "engines": {
     "node": "^20.18.1 || >22.12.0",
-    "yarn": ">=1.22.4 <2",
-    "npm": "Please use yarn instead of YARN to install dependencies",
-    "pnpm": "Please use yarn instead of YARN to install dependencies"
-  },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": "^19.0.5",
-    "@angular/common": "^19.0.5",
-    "@angular/compiler": "^19.0.5",
-    "@angular/core": "^19.0.5",
-    "@angular/forms": "^19.0.5",
-    "@angular/platform-browser": "^19.0.5",
-    "@angular/platform-browser-dynamic": "^19.0.5",
-    "@angular/router": "^19.0.5",
-    "rxjs": "~7.8.1",
-    "tslib": "^2.6.3",
-    "zone.js": "~0.15.0"
+    "yarn": ">=1.22.4 <2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.0.6",
-    "@angular/cli": "^19.0.6",
-    "@angular/compiler-cli": "^19.0.5",
-    "@types/jasmine": "~5.1.4",
-    "electron": "^33.3.1",
+    "electron": "^34.0.1",
     "electron-builder": "^25.1.8",
-    "jasmine-core": "~5.1.2",
-    "karma": "~6.4.3",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.1",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
-    "npm-run-all": "^4.1.5",
-    "typescript": "~5.6.3",
-    "wait-on": "^8.0.1"
+    "electron-builder-squirrel-windows": "^25.1.8",
+    "wait-on": "^8.0.2",
+    "concurrently": "^9.1.2"
   }
 }
